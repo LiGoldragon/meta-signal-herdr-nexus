@@ -27,6 +27,10 @@ pub struct FrameCapacityBytes(pub i64);
 #[rustfmt::skip]
 #[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, Hash)]
 #[cfg_attr(feature = "datom", derive(datom_codec::Datomizable, datom_codec::Composing))]
+pub struct ExternalOutputLimitBytes(pub i64);
+#[rustfmt::skip]
+#[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, Hash)]
+#[cfg_attr(feature = "datom", derive(datom_codec::Datomizable, datom_codec::Composing))]
 pub struct SocketPath(pub String);
 #[rustfmt::skip]
 #[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, Hash)]
@@ -48,6 +52,7 @@ pub struct Configuration {
     pub call_timeout_milliseconds: CallTimeoutMilliseconds,
     pub start_timeout_milliseconds: StartTimeoutMilliseconds,
     pub frame_capacity_bytes: FrameCapacityBytes,
+    pub external_output_limit_bytes: ExternalOutputLimitBytes,
 }
 #[rustfmt::skip]
 #[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, Hash)]
@@ -58,6 +63,7 @@ pub enum ConfigurationError {
     CallTimeoutOutOfRange(CallTimeoutMilliseconds),
     StartTimeoutOutOfRange(StartTimeoutMilliseconds),
     FrameCapacityOutOfRange(FrameCapacityBytes),
+    ExternalOutputLimitOutOfRange(ExternalOutputLimitBytes),
 }
 #[rustfmt::skip]
 #[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, Hash)]
@@ -90,7 +96,7 @@ impl signal::Contracted for Query {
 mod tests {
     use super::{
         CallTimeoutMilliseconds, Configuration, FrameCapacityBytes, HerdrExecutable,
-        PollingMilliseconds, Query, StartTimeoutMilliseconds,
+        ExternalOutputLimitBytes, PollingMilliseconds, Query, StartTimeoutMilliseconds,
     };
     use signal::{ByteViewable, Restorable, Signal, Signalizable};
 
@@ -102,6 +108,7 @@ mod tests {
             call_timeout_milliseconds: CallTimeoutMilliseconds(30_000),
             start_timeout_milliseconds: StartTimeoutMilliseconds(60_000),
             frame_capacity_bytes: FrameCapacityBytes(8 * 1024 * 1024),
+            external_output_limit_bytes: ExternalOutputLimitBytes(1024 * 1024),
         });
         let archived = query.signalize().expect("archive meta query");
         let restored = Signal::<Query>::from(archived.bytes().to_vec())

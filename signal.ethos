@@ -7,17 +7,19 @@ Signal
   CallTimeoutMilliseconds.Integer
   StartTimeoutMilliseconds.Integer
   FrameCapacityBytes.Integer
+  ExternalOutputLimitBytes.Integer
   SocketPath.String
   Message.String
   BootstrapRefusal.{ SocketPath Message }
   Configuration.{ HerdrExecutable PollingMilliseconds
                    CallTimeoutMilliseconds StartTimeoutMilliseconds
-                   FrameCapacityBytes }
+                   FrameCapacityBytes ExternalOutputLimitBytes }
   ConfigurationError.[ EmptyExecutable
                        PollingOutOfRange.PollingMilliseconds
                        CallTimeoutOutOfRange.CallTimeoutMilliseconds
                        StartTimeoutOutOfRange.StartTimeoutMilliseconds
-                       FrameCapacityOutOfRange.FrameCapacityBytes ]
+                       FrameCapacityOutOfRange.FrameCapacityBytes
+                       ExternalOutputLimitOutOfRange.ExternalOutputLimitBytes ]
   ConfigureOutcome.[ Succeeded
                      Invalid.Vector<ConfigurationError>
                      Unavailable.BootstrapRefusal ] ]
