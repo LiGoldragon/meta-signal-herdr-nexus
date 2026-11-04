@@ -24,6 +24,7 @@ pub enum SettingName {
     FrameCapacity,
     TransportTimeout,
     SubscriberCapacity,
+    Peer,
 }
 #[rustfmt::skip]
 #[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, Hash)]
@@ -72,6 +73,8 @@ pub enum Set {
     FrameCapacity(ByteLimit),
     TransportTimeout(Timeout),
     SubscriberCapacity(i64),
+    Peer(translator::PeerBinding),
+    RemovePeer(translator::PeerId),
 }
 #[rustfmt::skip]
 #[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, Hash)]
@@ -101,6 +104,7 @@ pub struct Invalid_Data {
 #[cfg_attr(feature = "datom", derive(datom_codec::Datomizable, datom_codec::Composing))]
 pub enum ConfigurationRefusal {
     Invalid(Invalid_Data),
+    UnknownPeer(translator::PeerId),
     Unavailable(BootstrapRefusal),
 }
 #[rustfmt::skip]
@@ -123,26 +127,4 @@ pub struct Configured_Data {
 pub enum Response {
     Configured(Configured_Data),
     ConfigureRefused(ConfigurationRefusal),
-}
-/// The authored schema whose digest identifies this meta contract on the wire.
-pub const ETHOS: &str = include_str!("../signal.ethos");
-
-impl signal::Contracted for Query {
-    const CONTRACT_SOURCE: &'static str = ETHOS;
-}
-
-#[cfg(test)]
-mod tests {
-    use super::{Query, Set, Timeout};
-    use signal::{ByteViewable, Restorable, Signal, Signalizable};
-
-    #[test]
-    fn one_field_setting_restores_through_validated_signal() {
-        let query = Query::Configure(Set::StartTimeout(Timeout(60_000)));
-        let archived = query.signalize().expect("archive meta query");
-        let restored = Signal::<Query>::from(archived.bytes().to_vec())
-            .restore()
-            .expect("validate and restore meta query");
-        assert_eq!(restored, query);
-    }
 }

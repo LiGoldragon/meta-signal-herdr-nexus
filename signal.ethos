@@ -1,11 +1,11 @@
 Signal
-[]                                                    ; imports
+[ translator:[ PeerBinding PeerId ] ]                 ; imports
 [ Configure.Set ]                                     ; inputs: apply one field
 [ Configured.{ Set Owner Readiness }                  ; outputs: applied field, owner and target readiness
   ConfigureRefused.ConfigurationRefusal ]
 [ Owner.[ Nexus Translator ]                          ; types
   SettingName.[ HerdrPath CallTimeout OutputLimit TextBudget
-                 StartTimeout Polling FrameCapacity TransportTimeout SubscriberCapacity ]
+                 StartTimeout Polling FrameCapacity TransportTimeout SubscriberCapacity Peer ]
   Readiness.[ Awaiting.Vector<SettingName>
               Ready ]
   PathValue.String
@@ -22,9 +22,12 @@ Signal
         Polling.Timeout
         FrameCapacity.ByteLimit
         TransportTimeout.Timeout
-        SubscriberCapacity.Integer ]
+        SubscriberCapacity.Integer
+        Peer.PeerBinding
+        RemovePeer.PeerId ]
   Message.String
   SocketPath.String
   BootstrapRefusal.{ SocketPath Message }
   ConfigurationRefusal.[ Invalid.{ Owner SettingName Message }
+                          UnknownPeer.PeerId
                           Unavailable.BootstrapRefusal ] ]

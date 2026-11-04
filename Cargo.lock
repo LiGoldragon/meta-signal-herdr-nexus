@@ -161,6 +161,7 @@ dependencies = [
  "protos",
  "rkyv",
  "signal",
+ "translator",
 ]
 
 [[package]]
@@ -368,6 +369,17 @@ name = "tinyvec"
 version = "1.13.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "fd3ca314f692efd6c868f8408f53fe444634a845f96c028b97d35f6a1f79f0ee"
+
+[[package]]
+name = "translator"
+version = "0.1.0"
+source = "git+https://github.com/LiGoldragon/translator?rev=2f1fd07b57921c9ba9d6e0bda342b5e8eb5c1e1a#2f1fd07b57921c9ba9d6e0bda342b5e8eb5c1e1a"
+dependencies = [
+ "datom-codec 0.32.3",
+ "protos",
+ "rkyv",
+ "signal",
+]
 
 [[package]]
 name = "unicode-ident"
