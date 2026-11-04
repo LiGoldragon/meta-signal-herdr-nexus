@@ -1,0 +1,19 @@
+Signal
+[]                                                    ; imports
+[ Configure.Configuration ]                           ; inputs: replace the complete runtime configuration
+[ Configured.ConfigureOutcome ]                       ; outputs: one answer after validation and swap
+[ HerdrExecutable.String                              ; types
+  PollingMilliseconds.Integer
+  CallTimeoutMilliseconds.Integer
+  StartTimeoutMilliseconds.Integer
+  FrameCapacityBytes.Integer
+  Configuration.{ HerdrExecutable PollingMilliseconds
+                   CallTimeoutMilliseconds StartTimeoutMilliseconds
+                   FrameCapacityBytes }
+  ConfigurationError.[ EmptyExecutable
+                       PollingOutOfRange.PollingMilliseconds
+                       CallTimeoutOutOfRange.CallTimeoutMilliseconds
+                       StartTimeoutOutOfRange.StartTimeoutMilliseconds
+                       FrameCapacityOutOfRange.FrameCapacityBytes ]
+  ConfigureOutcome.[ Succeeded
+                     Invalid.Vector<ConfigurationError> ] ]
