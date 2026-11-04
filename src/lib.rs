@@ -15,10 +15,10 @@ pub enum Owner {
 #[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, Hash)]
 #[cfg_attr(feature = "datom", derive(datom_codec::Datomizable, datom_codec::Composing))]
 pub enum SettingName {
-    HerdrPath(HerdrPath),
+    HerdrPath,
     CallTimeout,
     OutputLimit,
-    TextBudget(TextBudget),
+    TextBudget,
     StartTimeout,
     Polling,
     FrameCapacity,
@@ -34,7 +34,7 @@ pub enum Readiness {
 #[rustfmt::skip]
 #[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, Hash)]
 #[cfg_attr(feature = "datom", derive(datom_codec::Datomizable, datom_codec::Composing))]
-pub struct HerdrPath(pub String);
+pub struct PathValue(pub String);
 #[rustfmt::skip]
 #[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, Hash)]
 #[cfg_attr(feature = "datom", derive(datom_codec::Datomizable, datom_codec::Composing))]
@@ -54,7 +54,7 @@ pub struct DepthLimit(pub i64);
 #[rustfmt::skip]
 #[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, Hash)]
 #[cfg_attr(feature = "datom", derive(datom_codec::Datomizable, datom_codec::Composing))]
-pub struct TextBudget {
+pub struct BudgetValue {
     pub node_limit: NodeLimit,
     pub depth_limit: DepthLimit,
 }
@@ -62,10 +62,10 @@ pub struct TextBudget {
 #[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, Hash)]
 #[cfg_attr(feature = "datom", derive(datom_codec::Datomizable, datom_codec::Composing))]
 pub enum Set {
-    HerdrPath(HerdrPath),
+    HerdrPath(PathValue),
     CallTimeout(Timeout),
     OutputLimit(ByteLimit),
-    TextBudget(TextBudget),
+    TextBudget(BudgetValue),
     StartTimeout(Timeout),
     Polling(Timeout),
     FrameCapacity(ByteLimit),

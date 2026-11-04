@@ -8,16 +8,16 @@ Signal
                  StartTimeout Polling FrameCapacity TransportTimeout ]
   Readiness.[ Awaiting.Vector<SettingName>
               Ready ]
-  HerdrPath.String
+  PathValue.String
   Timeout.Integer
   ByteLimit.Integer
   NodeLimit.Integer
   DepthLimit.Integer
-  TextBudget.{ NodeLimit DepthLimit }
-  Set.[ HerdrPath
+  BudgetValue.{ NodeLimit DepthLimit }
+  Set.[ HerdrPath.PathValue
         CallTimeout.Timeout
         OutputLimit.ByteLimit
-        TextBudget
+        TextBudget.BudgetValue
         StartTimeout.Timeout
         Polling.Timeout
         FrameCapacity.ByteLimit
