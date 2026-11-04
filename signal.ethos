@@ -7,6 +7,9 @@ Signal
   CallTimeoutMilliseconds.Integer
   StartTimeoutMilliseconds.Integer
   FrameCapacityBytes.Integer
+  SocketPath.String
+  Message.String
+  BootstrapRefusal.{ SocketPath Message }
   Configuration.{ HerdrExecutable PollingMilliseconds
                    CallTimeoutMilliseconds StartTimeoutMilliseconds
                    FrameCapacityBytes }
@@ -16,4 +19,5 @@ Signal
                        StartTimeoutOutOfRange.StartTimeoutMilliseconds
                        FrameCapacityOutOfRange.FrameCapacityBytes ]
   ConfigureOutcome.[ Succeeded
-                     Invalid.Vector<ConfigurationError> ] ]
+                     Invalid.Vector<ConfigurationError>
+                     Unavailable.BootstrapRefusal ] ]

@@ -27,6 +27,21 @@ pub struct FrameCapacityBytes(pub i64);
 #[rustfmt::skip]
 #[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, Hash)]
 #[cfg_attr(feature = "datom", derive(datom_codec::Datomizable, datom_codec::Composing))]
+pub struct SocketPath(pub String);
+#[rustfmt::skip]
+#[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, Hash)]
+#[cfg_attr(feature = "datom", derive(datom_codec::Datomizable, datom_codec::Composing))]
+pub struct Message(pub String);
+#[rustfmt::skip]
+#[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, Hash)]
+#[cfg_attr(feature = "datom", derive(datom_codec::Datomizable, datom_codec::Composing))]
+pub struct BootstrapRefusal {
+    pub socket_path: SocketPath,
+    pub message: Message,
+}
+#[rustfmt::skip]
+#[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, Hash)]
+#[cfg_attr(feature = "datom", derive(datom_codec::Datomizable, datom_codec::Composing))]
 pub struct Configuration {
     pub herdr_executable: HerdrExecutable,
     pub polling_milliseconds: PollingMilliseconds,
@@ -50,6 +65,7 @@ pub enum ConfigurationError {
 pub enum ConfigureOutcome {
     Succeeded,
     Invalid(std::vec::Vec<ConfigurationError>),
+    Unavailable(BootstrapRefusal),
 }
 #[rustfmt::skip]
 #[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, Hash)]
@@ -63,7 +79,6 @@ pub enum Query {
 pub enum Response {
     Configured(ConfigureOutcome),
 }
-
 /// The authored schema whose digest identifies this meta contract on the wire.
 pub const ETHOS: &str = include_str!("../signal.ethos");
 
