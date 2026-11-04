@@ -7,35 +7,78 @@
 #[rustfmt::skip]
 #[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, Hash)]
 #[cfg_attr(feature = "datom", derive(datom_codec::Datomizable, datom_codec::Composing))]
-pub struct HerdrExecutable(pub String);
+pub enum Owner {
+    Nexus,
+    Translator,
+}
 #[rustfmt::skip]
 #[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, Hash)]
 #[cfg_attr(feature = "datom", derive(datom_codec::Datomizable, datom_codec::Composing))]
-pub struct PollingMilliseconds(pub i64);
+pub enum SettingName {
+    HerdrPath(HerdrPath),
+    CallTimeout,
+    OutputLimit,
+    TextBudget(TextBudget),
+    StartTimeout,
+    Polling,
+    FrameCapacity,
+    TransportTimeout,
+}
 #[rustfmt::skip]
 #[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, Hash)]
 #[cfg_attr(feature = "datom", derive(datom_codec::Datomizable, datom_codec::Composing))]
-pub struct CallTimeoutMilliseconds(pub i64);
+pub enum Readiness {
+    Awaiting(std::vec::Vec<SettingName>),
+    Ready,
+}
 #[rustfmt::skip]
 #[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, Hash)]
 #[cfg_attr(feature = "datom", derive(datom_codec::Datomizable, datom_codec::Composing))]
-pub struct StartTimeoutMilliseconds(pub i64);
+pub struct HerdrPath(pub String);
 #[rustfmt::skip]
 #[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, Hash)]
 #[cfg_attr(feature = "datom", derive(datom_codec::Datomizable, datom_codec::Composing))]
-pub struct FrameCapacityBytes(pub i64);
+pub struct Timeout(pub i64);
 #[rustfmt::skip]
 #[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, Hash)]
 #[cfg_attr(feature = "datom", derive(datom_codec::Datomizable, datom_codec::Composing))]
-pub struct ExternalOutputLimitBytes(pub i64);
+pub struct ByteLimit(pub i64);
 #[rustfmt::skip]
 #[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, Hash)]
 #[cfg_attr(feature = "datom", derive(datom_codec::Datomizable, datom_codec::Composing))]
-pub struct SocketPath(pub String);
+pub struct NodeLimit(pub i64);
+#[rustfmt::skip]
+#[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, Hash)]
+#[cfg_attr(feature = "datom", derive(datom_codec::Datomizable, datom_codec::Composing))]
+pub struct DepthLimit(pub i64);
+#[rustfmt::skip]
+#[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, Hash)]
+#[cfg_attr(feature = "datom", derive(datom_codec::Datomizable, datom_codec::Composing))]
+pub struct TextBudget {
+    pub node_limit: NodeLimit,
+    pub depth_limit: DepthLimit,
+}
+#[rustfmt::skip]
+#[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, Hash)]
+#[cfg_attr(feature = "datom", derive(datom_codec::Datomizable, datom_codec::Composing))]
+pub enum Set {
+    HerdrPath(HerdrPath),
+    CallTimeout(Timeout),
+    OutputLimit(ByteLimit),
+    TextBudget(TextBudget),
+    StartTimeout(Timeout),
+    Polling(Timeout),
+    FrameCapacity(ByteLimit),
+    TransportTimeout(Timeout),
+}
 #[rustfmt::skip]
 #[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, Hash)]
 #[cfg_attr(feature = "datom", derive(datom_codec::Datomizable, datom_codec::Composing))]
 pub struct Message(pub String);
+#[rustfmt::skip]
+#[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, Hash)]
+#[cfg_attr(feature = "datom", derive(datom_codec::Datomizable, datom_codec::Composing))]
+pub struct SocketPath(pub String);
 #[rustfmt::skip]
 #[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, Hash)]
 #[cfg_attr(feature = "datom", derive(datom_codec::Datomizable, datom_codec::Composing))]
@@ -46,45 +89,39 @@ pub struct BootstrapRefusal {
 #[rustfmt::skip]
 #[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, Hash)]
 #[cfg_attr(feature = "datom", derive(datom_codec::Datomizable, datom_codec::Composing))]
-pub struct Configuration {
-    pub herdr_executable: HerdrExecutable,
-    pub polling_milliseconds: PollingMilliseconds,
-    pub call_timeout_milliseconds: CallTimeoutMilliseconds,
-    pub start_timeout_milliseconds: StartTimeoutMilliseconds,
-    pub frame_capacity_bytes: FrameCapacityBytes,
-    pub external_output_limit_bytes: ExternalOutputLimitBytes,
+pub struct Invalid_Data {
+    pub owner: Owner,
+    pub setting_name: SettingName,
+    pub message: Message,
 }
 #[rustfmt::skip]
 #[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, Hash)]
 #[cfg_attr(feature = "datom", derive(datom_codec::Datomizable, datom_codec::Composing))]
-pub enum ConfigurationError {
-    EmptyExecutable,
-    PollingOutOfRange(PollingMilliseconds),
-    CallTimeoutOutOfRange(CallTimeoutMilliseconds),
-    StartTimeoutOutOfRange(StartTimeoutMilliseconds),
-    FrameCapacityOutOfRange(FrameCapacityBytes),
-    ExternalOutputLimitOutOfRange(ExternalOutputLimitBytes),
-}
-#[rustfmt::skip]
-#[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, Hash)]
-#[cfg_attr(feature = "datom", derive(datom_codec::Datomizable, datom_codec::Composing))]
-pub enum ConfigureOutcome {
-    Succeeded,
-    Invalid(std::vec::Vec<ConfigurationError>),
+pub enum ConfigurationRefusal {
+    Invalid(Invalid_Data),
     Unavailable(BootstrapRefusal),
 }
 #[rustfmt::skip]
 #[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, Hash)]
 #[cfg_attr(feature = "datom", derive(datom_codec::Datomizable, datom_codec::Composing))]
 pub enum Query {
-    Configure(Configuration),
+    Configure(Set),
+}
+#[rustfmt::skip]
+#[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, Hash)]
+#[cfg_attr(feature = "datom", derive(datom_codec::Datomizable, datom_codec::Composing))]
+pub struct Configured_Data {
+    pub owner: Owner,
+    pub readiness: Readiness,
 }
 #[rustfmt::skip]
 #[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, Hash)]
 #[cfg_attr(feature = "datom", derive(datom_codec::Datomizable, datom_codec::Composing))]
 pub enum Response {
-    Configured(ConfigureOutcome),
+    Configured(Configured_Data),
+    ConfigureRefused(ConfigurationRefusal),
 }
+
 /// The authored schema whose digest identifies this meta contract on the wire.
 pub const ETHOS: &str = include_str!("../signal.ethos");
 
@@ -94,22 +131,12 @@ impl signal::Contracted for Query {
 
 #[cfg(test)]
 mod tests {
-    use super::{
-        CallTimeoutMilliseconds, Configuration, FrameCapacityBytes, HerdrExecutable,
-        ExternalOutputLimitBytes, PollingMilliseconds, Query, StartTimeoutMilliseconds,
-    };
+    use super::{Query, Set, Timeout};
     use signal::{ByteViewable, Restorable, Signal, Signalizable};
 
     #[test]
-    fn numeric_configuration_restores_through_fixed_endian_validated_signal() {
-        let query = Query::Configure(Configuration {
-            herdr_executable: HerdrExecutable("/run/current-system/sw/bin/herdr".into()),
-            polling_milliseconds: PollingMilliseconds(750),
-            call_timeout_milliseconds: CallTimeoutMilliseconds(30_000),
-            start_timeout_milliseconds: StartTimeoutMilliseconds(60_000),
-            frame_capacity_bytes: FrameCapacityBytes(8 * 1024 * 1024),
-            external_output_limit_bytes: ExternalOutputLimitBytes(1024 * 1024),
-        });
+    fn one_field_setting_restores_through_validated_signal() {
+        let query = Query::Configure(Set::StartTimeout(Timeout(60_000)));
         let archived = query.signalize().expect("archive meta query");
         let restored = Signal::<Query>::from(archived.bytes().to_vec())
             .restore()

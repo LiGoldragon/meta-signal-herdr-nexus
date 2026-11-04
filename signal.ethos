@@ -1,25 +1,29 @@
 Signal
 []                                                    ; imports
-[ Configure.Configuration ]                           ; inputs: replace the complete runtime configuration
-[ Configured.ConfigureOutcome ]                       ; outputs: one answer after validation and swap
-[ HerdrExecutable.String                              ; types
-  PollingMilliseconds.Integer
-  CallTimeoutMilliseconds.Integer
-  StartTimeoutMilliseconds.Integer
-  FrameCapacityBytes.Integer
-  ExternalOutputLimitBytes.Integer
-  SocketPath.String
+[ Configure.Set ]                                     ; inputs: apply one field
+[ Configured.{ Owner Readiness }                      ; outputs: applied field and target readiness
+  ConfigureRefused.ConfigurationRefusal ]
+[ Owner.[ Nexus Translator ]                          ; types
+  SettingName.[ HerdrPath CallTimeout OutputLimit TextBudget
+                 StartTimeout Polling FrameCapacity TransportTimeout ]
+  Readiness.[ Awaiting.Vector<SettingName>
+              Ready ]
+  HerdrPath.String
+  Timeout.Integer
+  ByteLimit.Integer
+  NodeLimit.Integer
+  DepthLimit.Integer
+  TextBudget.{ NodeLimit DepthLimit }
+  Set.[ HerdrPath
+        CallTimeout.Timeout
+        OutputLimit.ByteLimit
+        TextBudget
+        StartTimeout.Timeout
+        Polling.Timeout
+        FrameCapacity.ByteLimit
+        TransportTimeout.Timeout ]
   Message.String
+  SocketPath.String
   BootstrapRefusal.{ SocketPath Message }
-  Configuration.{ HerdrExecutable PollingMilliseconds
-                   CallTimeoutMilliseconds StartTimeoutMilliseconds
-                   FrameCapacityBytes ExternalOutputLimitBytes }
-  ConfigurationError.[ EmptyExecutable
-                       PollingOutOfRange.PollingMilliseconds
-                       CallTimeoutOutOfRange.CallTimeoutMilliseconds
-                       StartTimeoutOutOfRange.StartTimeoutMilliseconds
-                       FrameCapacityOutOfRange.FrameCapacityBytes
-                       ExternalOutputLimitOutOfRange.ExternalOutputLimitBytes ]
-  ConfigureOutcome.[ Succeeded
-                     Invalid.Vector<ConfigurationError>
-                     Unavailable.BootstrapRefusal ] ]
+  ConfigurationRefusal.[ Invalid.{ Owner SettingName Message }
+                          Unavailable.BootstrapRefusal ] ]
