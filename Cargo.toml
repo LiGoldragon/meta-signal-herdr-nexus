@@ -16,4 +16,4 @@ datom-codec = { git = "https://github.com/LiGoldragon/datom-codec", rev = "e26d9
 protos = { git = "https://github.com/LiGoldragon/protos", rev = "15b41da8f2579e73ead59bc0c2b97529b8ac32d3", optional = true }
 rkyv = { version = "0.8", default-features = false, features = ["std", "bytecheck", "little_endian", "pointer_width_32", "unaligned"] }
 signal = { git = "https://github.com/LiGoldragon/signal", rev = "0cad1d1aeddec7da2971dc88e964320a6db48c20", default-features = false }
-translator = { git = "https://github.com/LiGoldragon/translator", rev = "2676fd0cb0ced3316dc151f73a9f59856e15e62d", default-features = false }
+translator = { git = "https://github.com/LiGoldragon/translator", rev = "751c326f11c874b527a69ce6377ce9e196aeca37", default-features = false }
