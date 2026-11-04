@@ -1,11 +1,11 @@
 Signal
 []                                                    ; imports
 [ Configure.Set ]                                     ; inputs: apply one field
-[ Configured.{ Owner Readiness }                      ; outputs: applied field and target readiness
+[ Configured.{ Set Owner Readiness }                  ; outputs: applied field, owner and target readiness
   ConfigureRefused.ConfigurationRefusal ]
 [ Owner.[ Nexus Translator ]                          ; types
   SettingName.[ HerdrPath CallTimeout OutputLimit TextBudget
-                 StartTimeout Polling FrameCapacity TransportTimeout ]
+                 StartTimeout Polling FrameCapacity TransportTimeout SubscriberCapacity ]
   Readiness.[ Awaiting.Vector<SettingName>
               Ready ]
   PathValue.String
@@ -21,7 +21,8 @@ Signal
         StartTimeout.Timeout
         Polling.Timeout
         FrameCapacity.ByteLimit
-        TransportTimeout.Timeout ]
+        TransportTimeout.Timeout
+        SubscriberCapacity.Integer ]
   Message.String
   SocketPath.String
   BootstrapRefusal.{ SocketPath Message }

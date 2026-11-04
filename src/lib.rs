@@ -23,6 +23,7 @@ pub enum SettingName {
     Polling,
     FrameCapacity,
     TransportTimeout,
+    SubscriberCapacity,
 }
 #[rustfmt::skip]
 #[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, Hash)]
@@ -70,6 +71,7 @@ pub enum Set {
     Polling(Timeout),
     FrameCapacity(ByteLimit),
     TransportTimeout(Timeout),
+    SubscriberCapacity(i64),
 }
 #[rustfmt::skip]
 #[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, Hash)]
@@ -111,6 +113,7 @@ pub enum Query {
 #[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, Hash)]
 #[cfg_attr(feature = "datom", derive(datom_codec::Datomizable, datom_codec::Composing))]
 pub struct Configured_Data {
+    pub set: Set,
     pub owner: Owner,
     pub readiness: Readiness,
 }
@@ -121,7 +124,6 @@ pub enum Response {
     Configured(Configured_Data),
     ConfigureRefused(ConfigurationRefusal),
 }
-
 /// The authored schema whose digest identifies this meta contract on the wire.
 pub const ETHOS: &str = include_str!("../signal.ethos");
 
