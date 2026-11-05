@@ -372,8 +372,8 @@ checksum = "fd3ca314f692efd6c868f8408f53fe444634a845f96c028b97d35f6a1f79f0ee"
 
 [[package]]
 name = "translator"
-version = "0.1.0"
-source = "git+https://github.com/LiGoldragon/translator?rev=3a434151152fcc5c0e0c36994c52c7cb96457a65#3a434151152fcc5c0e0c36994c52c7cb96457a65"
+version = "0.2.0"
+source = "git+https://github.com/LiGoldragon/translator?rev=707889373b162d1ffdd18d1348ab0f43df6e06ee#707889373b162d1ffdd18d1348ab0f43df6e06ee"
 dependencies = [
  "datom-codec 0.32.3",
  "protos",
