@@ -1,5 +1,9 @@
 # Upgrades
 
+## 0.2.1 — translator 0.3.1
+
+Repins translator 0.3.1 (`1b0e`), up from 0.3.0 (`eeaa`), so a consumer that also calls translator's start-time place preparation holds one translator in its lock. The contract uses only `translator::PeerBinding` and `translator::PeerId`, whose shapes are unchanged. The authored `signal.ethos`, the generated types and the archive layout are unchanged.
+
 ## 0.2.0 — signal 10.3.0, datom-codec 0.33.0, protos 0.33.0, translator 0.3.0
 
 Repins signal 10.3.0 (7afb), datom-codec 0.33.0 (eabe), protos 0.33.0 (3c7a) and translator 0.3.0 (eeaa), each spelled as translator spells them so the lock holds one source of each. The translator moves from 0.2.0 (7078); the contract uses only `translator::PeerBinding` and `translator::PeerId`, whose shapes are unchanged.
