@@ -7,7 +7,7 @@
       url = "github:LiGoldragon/rust-build";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    ethos-zero.url = "github:LiGoldragon/ethos-zero/b8052c2404374265dfcddbde83fef76977f78acd";
+    ethos-zero.url = "github:LiGoldragon/ethos-zero";
   };
   outputs = { nixpkgs, flake-utils, rust-build, ethos-zero, ... }:
     flake-utils.lib.eachDefaultSystem (system:
@@ -22,6 +22,15 @@
             src = source;
             inherit cargoArtifacts;
             cargoTestExtraArgs = "--all-features";
+          };
+          test-default = rust.craneLib.cargoTest {
+            src = source;
+            inherit cargoArtifacts;
+          };
+          test-datom = rust.craneLib.cargoTest {
+            src = source;
+            inherit cargoArtifacts;
+            cargoTestExtraArgs = "--all-targets --features datom";
           };
           generated = pkgs.runCommand "meta-signal-herdr-generated" {
             generator = ethos-zero.packages.${system}.default;
