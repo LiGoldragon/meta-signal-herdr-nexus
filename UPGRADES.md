@@ -1,5 +1,9 @@
 # Upgrades
 
+## 0.4.1 — translator unix
+
+The translator dependency turns on its `unix` feature, which attaches libc and nix: the edge the build base's feature set asks of a repository that builds translator. No change to the authored ethos, the generated Rust, the archive or the Datom text. The feature leaves this manifest when `unix` becomes a crate of its own.
+
 ## 0.4.0 — translator 0.5.0, signal 11.0.0
 
 Only the pins move: translator 0.5.0 (abc89b9) and signal 11.0.0 (6d4eb74), which carries no transport feature and no tokio. Datom-codec 09a0526 and protos c93b598 stay. No change to the authored ethos, the generated Rust, the archive or the Datom text. A consumer repins the two together.
