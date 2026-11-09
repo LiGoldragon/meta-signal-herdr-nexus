@@ -1,8 +1,8 @@
 # Upgrades
 
-## 0.3.2 — the datom feature carries signal/datom
+## 0.3.3 — translator 0.4.2
 
-The `datom` feature now also turns on signal's `datom` feature, the edge the build base's feature set asks of a repository that builds signal with it. The pins stay: translator 0.4.1 (ec95102), signal 10.4.1 (d77169d), datom-codec 09a0526, protos c93b598. No change to the authored ethos, the generated Rust, the archive or the Datom text.
+Only the translator pin moves: translator 0.4.2 (27da70f), whose `datom` feature carries signal/datom, the edge the build base's feature set asks for; this crate's `datom` feature reaches it through translator. The pins stay: signal 10.4.1 (d77169d), datom-codec 09a0526, protos c93b598. No change to the authored ethos, the generated Rust, the archive or the Datom text.
 
 ## 0.3.1 — translator 0.4.1, signal 10.4.1, datom-codec 09a0526, protos c93b598
 

@@ -164,7 +164,7 @@ checksum = "32a66949e030da00e8c7d4434b251670a91556f4144941d37452769c25d58a53"
 
 [[package]]
 name = "meta-signal-herdr-nexus"
-version = "0.3.2"
+version = "0.3.3"
 dependencies = [
  "datom-codec",
  "protos",
@@ -333,7 +333,9 @@ name = "signal"
 version = "10.4.1"
 source = "git+https://github.com/LiGoldragon/signal?rev=d77169d#d77169d061d0d0d7913415257d0f1c1603260583"
 dependencies = [
+ "datom-codec",
  "ethos-zero",
+ "protos",
  "rkyv",
  "thiserror",
 ]
@@ -409,8 +411,8 @@ checksum = "1f3ccbac311fea05f86f61904b462b55fb3df8837a366dfc601a0161d0532f20"
 
 [[package]]
 name = "translator"
-version = "0.4.1"
-source = "git+https://github.com/LiGoldragon/translator?rev=ec95102#ec95102d8e65a5c195fd070e0421574eff97d020"
+version = "0.4.2"
+source = "git+https://github.com/LiGoldragon/translator?rev=27da70f#27da70fda647d78655d755477913a47267eb9c62"
 dependencies = [
  "datom-codec",
  "protos",

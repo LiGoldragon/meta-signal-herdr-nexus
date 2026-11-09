@@ -576,7 +576,7 @@ rec {
       };
       "meta-signal-herdr-nexus" = rec {
         crateName = "meta-signal-herdr-nexus";
-        version = "0.3.2";
+        version = "0.3.3";
         edition = "2021";
         src = lib.cleanSourceWith { filter = sourceFilter;  src = ./.; };
         libName = "meta_signal_herdr_nexus";
@@ -1151,6 +1151,16 @@ rec {
         };
         dependencies = [
           {
+            name = "datom-codec";
+            packageId = "datom-codec";
+            optional = true;
+          }
+          {
+            name = "protos";
+            packageId = "protos";
+            optional = true;
+          }
+          {
             name = "rkyv";
             packageId = "rkyv";
             usesDefaultFeatures = false;
@@ -1171,6 +1181,7 @@ rec {
           "datom" = [ "dep:datom-codec" "dep:protos" ];
           "transport" = [ "dep:tokio" ];
         };
+        resolvedDefaultFeatures = [ "datom" ];
       };
       "simdutf8" = rec {
         crateName = "simdutf8";
@@ -1353,13 +1364,13 @@ rec {
       };
       "translator" = rec {
         crateName = "translator";
-        version = "0.4.1";
+        version = "0.4.2";
         edition = "2021";
         workspace_member = null;
         src = pkgs.fetchgit {
           url = "https://github.com/LiGoldragon/translator";
-          rev = "ec95102d8e65a5c195fd070e0421574eff97d020";
-          sha256 = "1rscc9j2na45scyvyscy8bn399b69swjfdzbs7nn9fhcg0bif2nc";
+          rev = "27da70fda647d78655d755477913a47267eb9c62";
+          sha256 = "0xs4ni7zskajcfbmszdxqqkwjymnsvvdydx2higrdgwlyq6pk3sc";
         };
         dependencies = [
           {
@@ -1391,7 +1402,7 @@ rec {
           }
         ];
         features = {
-          "datom" = [ "dep:datom-codec" "dep:protos" ];
+          "datom" = [ "dep:datom-codec" "dep:protos" "signal/datom" ];
           "text" = [ "datom" ];
           "unix" = [ "dep:libc" "dep:nix" ];
         };

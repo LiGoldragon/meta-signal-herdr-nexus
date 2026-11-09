@@ -1,6 +1,6 @@
 [package]
 name = "meta-signal-herdr-nexus"
-version = "0.3.2"
+version = "0.3.3"
 edition = "2021"
 rust-version = "1.89"
 
@@ -16,4 +16,4 @@ datom-codec = { git = "https://github.com/LiGoldragon/datom-codec", rev = "09a05
 protos = { git = "https://github.com/LiGoldragon/protos", rev = "c93b598", optional = true }
 rkyv = { version = "0.8", default-features = false, features = ["std", "bytecheck", "little_endian", "pointer_width_32", "unaligned"] }
 signal = { git = "https://github.com/LiGoldragon/signal", rev = "d77169d", default-features = false }
-translator = { git = "https://github.com/LiGoldragon/translator", rev = "ec95102", default-features = false }
+translator = { git = "https://github.com/LiGoldragon/translator", rev = "27da70f", default-features = false }
