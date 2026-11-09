@@ -1,5 +1,12 @@
 # Upgrades
 
+## 0.3.0 — translator 0.4.0, signal 10.4.0, datom-codec 0bbeb11, protos 4024614
+
+Only the pins move: translator 0.4.0 (6777fa4), signal 10.4.0 (7e6dfe5), datom-codec 0.33.1
+(0bbeb11) and protos 0.33.0 (4024614). No change to the authored ethos, the generated Rust,
+the archive or the Datom text. A consumer repins the four together so that one translator and
+one signal sit in its graph.
+
 ## 0.2.1 — translator 0.3.1
 
 Repins translator 0.3.1 (`1b0e`), up from 0.3.0 (`eeaa`), so a consumer that also calls translator's start-time place preparation holds one translator in its lock. The contract uses only `translator::PeerBinding` and `translator::PeerId`, whose shapes are unchanged. The authored `signal.ethos`, the generated types and the archive layout are unchanged.
