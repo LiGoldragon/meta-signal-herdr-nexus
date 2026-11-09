@@ -87,9 +87,7 @@ where
 
 #[test]
 fn queries_and_responses_survive_the_binary_archive() {
-    use meta_signal_herdr_nexus::{
-        ConfigurationRefusal, Configured_Data, Owner, Readiness, Set, Timeout,
-    };
+    use meta_signal_herdr_nexus::{Configured_Data, Owner, Readiness, Set, Timeout};
     archive_round_trip(&Query::Configure(Set::CallTimeout(Timeout(5000))));
     archive_round_trip(&Response::Configured(Configured_Data {
         set: Set::Polling(Timeout(100)),
