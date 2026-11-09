@@ -576,7 +576,7 @@ rec {
       };
       "meta-signal-herdr-nexus" = rec {
         crateName = "meta-signal-herdr-nexus";
-        version = "0.3.1";
+        version = "0.3.2";
         edition = "2021";
         src = lib.cleanSourceWith { filter = sourceFilter;  src = ./.; };
         libName = "meta_signal_herdr_nexus";
