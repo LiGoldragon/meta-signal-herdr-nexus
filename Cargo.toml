@@ -16,4 +16,4 @@ datom-codec = { git = "https://github.com/LiGoldragon/datom-codec", rev = "0bbeb
 protos = { git = "https://github.com/LiGoldragon/protos", rev = "4024614", optional = true }
 rkyv = { version = "0.8", default-features = false, features = ["std", "bytecheck", "little_endian", "pointer_width_32", "unaligned"] }
 signal = { git = "https://github.com/LiGoldragon/signal", rev = "7e6dfe5", default-features = false }
-translator = { git = "https://github.com/LiGoldragon/translator", rev = "6777fa4", default-features = false }
+translator = { git = "https://github.com/LiGoldragon/translator", rev = "84353c5", default-features = false }
