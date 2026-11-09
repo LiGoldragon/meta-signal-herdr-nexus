@@ -1,9 +1,5 @@
 # Upgrades
 
-## 0.3.1 — signal 10.4.1, datom-codec 09a0526, protos c93b598
-
-Only the pins move: signal 10.4.1 (d77169d), datom-codec 0.33.1 (09a0526) and protos 0.33.0 (c93b598), with the build-dependency ethos-zero 22.0.0 (1976e45) that signal brings; translator stays 0.4.0 (84353c5). No change to the authored ethos, the generated Rust, the archive or the Datom text.
-
 ## 0.3.0 — translator 0.4.0, signal 10.4.0, datom-codec 0bbeb11, protos 4024614
 
 Only the pins move: translator 0.4.0 (6777fa4), signal 10.4.0 (7e6dfe5), datom-codec 0.33.1
