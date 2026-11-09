@@ -164,7 +164,7 @@ checksum = "32a66949e030da00e8c7d4434b251670a91556f4144941d37452769c25d58a53"
 
 [[package]]
 name = "meta-signal-herdr-nexus"
-version = "0.3.3"
+version = "0.4.0"
 dependencies = [
  "datom-codec",
  "protos",
@@ -330,8 +330,8 @@ checksum = "cf54715a573b99ac80df0bc206da022bcd442c974952c7b9720069370852e21f"
 
 [[package]]
 name = "signal"
-version = "10.4.1"
-source = "git+https://github.com/LiGoldragon/signal?rev=d77169d#d77169d061d0d0d7913415257d0f1c1603260583"
+version = "11.0.0"
+source = "git+https://github.com/LiGoldragon/signal?rev=6d4eb74#6d4eb74a238ea4a6149bd12c42a8c06aec01b154"
 dependencies = [
  "datom-codec",
  "ethos-zero",
@@ -411,8 +411,8 @@ checksum = "1f3ccbac311fea05f86f61904b462b55fb3df8837a366dfc601a0161d0532f20"
 
 [[package]]
 name = "translator"
-version = "0.4.2"
-source = "git+https://github.com/LiGoldragon/translator?rev=27da70f#27da70fda647d78655d755477913a47267eb9c62"
+version = "0.5.0"
+source = "git+https://github.com/LiGoldragon/translator?rev=abc89b9#abc89b9cc7469a35700cb222ba31a8f5cb0745e6"
 dependencies = [
  "datom-codec",
  "protos",

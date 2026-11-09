@@ -1,5 +1,9 @@
 # Upgrades
 
+## 0.4.0 — translator 0.5.0, signal 11.0.0
+
+Only the pins move: translator 0.5.0 (abc89b9) and signal 11.0.0 (6d4eb74), which carries no transport feature and no tokio. Datom-codec 09a0526 and protos c93b598 stay. No change to the authored ethos, the generated Rust, the archive or the Datom text. A consumer repins the two together.
+
 ## 0.3.3 — translator 0.4.2
 
 Only the translator pin moves: translator 0.4.2 (27da70f), whose `datom` feature carries signal/datom, the edge the build base's feature set asks for; this crate's `datom` feature reaches it through translator. The pins stay: signal 10.4.1 (d77169d), datom-codec 09a0526, protos c93b598. No change to the authored ethos, the generated Rust, the archive or the Datom text.
